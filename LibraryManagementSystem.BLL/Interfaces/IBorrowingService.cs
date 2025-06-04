@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LibraryManagementSystem.BLL.Interfaces
 {
-    internal class IBorrowingService
+    public class IBorrowingService
     {
 
     }

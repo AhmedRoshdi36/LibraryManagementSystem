@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LibraryManagementSystem.BLL.Interfaces
 {
-    internal class IBookService
+    public class IBookService
     {
     }
 }
