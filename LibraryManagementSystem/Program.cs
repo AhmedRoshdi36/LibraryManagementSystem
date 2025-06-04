@@ -55,7 +55,7 @@ namespace LibraryManagementSystem
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Author}/{action=Index}/{id?}");
+                pattern: "{controller=book}/{action=Index}/{id?}");
 
             app.Run();
         }

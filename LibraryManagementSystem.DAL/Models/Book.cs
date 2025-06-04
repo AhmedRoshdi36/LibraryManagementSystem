@@ -19,6 +19,6 @@ namespace LibraryManagementSystem.DAL.Models
         [Required(ErrorMessage = "Author is required")]
         public int AuthorId { get; set; }
         public Author Author { get; set; } = null!;
-        public List<BookTransaction> bookTransactions{ get; set; } = new List<BookTransaction>();
+        public List<BookTransaction> bookTransactions { get; set; } = new List<BookTransaction>();
     }
 }

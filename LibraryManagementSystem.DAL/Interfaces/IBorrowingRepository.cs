@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LibraryManagementSystem.DAL.Interfaces
 {
-    public class IBorrowingRepository
+    public interface IBorrowingRepository
     {
     }
 }
