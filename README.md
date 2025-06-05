@@ -57,29 +57,54 @@ A simple yet functional **Library Management System** built using **ASP.NET MVC*
 
 📂 Project Structure
 
-/Controllers
-├── AuthorController.cs
-├── BookController.cs
-├── BookLibraryController.cs
-├── BorrowingController.cs
+📁 Controllers
 
-/Services
-├── Interfaces/
-└── Implementations/
+├─ 📄 AuthorController.cs
 
-/Repositories
-├── Interfaces/
-└── Implementations/
+├─ 📄 BookController.cs
 
-/Models
-├── Entities/
-└── DTOs/
+├─ 📄 BookLibraryController.cs
 
-/Views
-├── Author/
-├── Book/
-├── BookLibrary/
-└── Borrowing/
+└─ 📄 BorrowingController.cs
+
+
+
+📁 Services
+
+├─ 📁 Interfaces
+
+└─ 📁 Implementations
+
+
+📁 Repositories
+
+├─ 📁 Interfaces
+
+└─ 📁 Implementations
+
+
+
+📁 Models
+
+├─ 📁 Entities
+
+
+└─ 📁 DTOs
+
+
+📁 Views
+
+├─ 📁 Author
+
+├─ 📁 Book
+
+├─ 📁 BookLibrary
+
+└─ 📁 Borrowing
+
+
+
 🧑‍💻 Author
+
 
 Ahmed Roshdy.NET Developer
