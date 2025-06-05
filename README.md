@@ -1,99 +1,85 @@
-📚 Library Management System
 
-A simple yet functional Library Management System built using ASP.NET MVC, Entity Framework Core (Code-First), and an in-memory database. This system is designed to manage authors, books, and borrowing transactions using an n-tier architecture with a clear separation of concerns.
+# 📚 Library Management System
 
-✅ Features
+A simple yet functional **Library Management System** built using **ASP.NET MVC**, **Entity Framework Core (Code-First)**, and an **in-memory database**. The system manages authors, books, and borrowing transactions using an **n-tier architecture** with clear separation of concerns.
 
-Author Management: Add, edit, delete, and list authors with full name and bio and Validation Full name contain 4 words each at least 2 char
+---
 
-and Unique Email with valid format
+## ✅ Features
 
-Book Management: Add, edit, delete, and list books with genre and author assignment. with required title and genre Enum
+### 📖 Author Management
+- Add, edit, delete, and list authors.
+- Full name must contain **4 words**, each with **at least 2 characters**.
+- Email must be **unique** and follow a **valid format**.
 
-Borrowing System: Request and return books, track borrowing records.
+### 📚 Book Management
+- Add, edit, delete, and list books.
+- Assign books to authors.
+- Genre is selected from an **enum**.
+- Book title and genre are **required** fields.
 
-Validation: Client-side and server-side validation.
+### 🔁 Borrowing System
+- **Borrow** a book:
+  - Sets `BorrowedDate`.
+  - Prevents borrowing if already checked out.
+- **Return** a book:
+  - Sets `ReturnedDate`.
+  - Marks book as available again.
 
-Dynamic Dropdowns: Genre and author selection in book forms.
+### ✅ Validation
+- Client-side and server-side validation included.
 
-Seeding: In-memory database seeding for development/testing.
+### 🎯 Dynamic Dropdowns
+- Genre and Author dropdowns in book forms.
 
-🔄 Borrowing Transactions
+### 🌱 Seeding
+- Initial data seeding for development/testing using **InMemory** DB.
 
-Borrow:
+---
 
-Sets BorrowedDate.
+## 🧱 Architecture
 
-Prevents borrowing if already checked out.
+### 🔹 N-Tier Structure
 
-Return:
+- **Presentation Layer:** ASP.NET MVC Controllers & Views
+- **Business Layer:** Services for all business logic
+- **Data Layer:** EF Core with InMemory DB and Repositories
 
-Sets ReturnedDate.
+---
 
-Marks book as available again.
+## 🛠 Technologies
 
-🧱 Architecture
-
-🔹 N-Tier Design:
-
-Presentation Layer: ASP.NET MVC Controllers & Views.
-
-Business Layer: Services for all business logic.
-
-Data Layer: EF Core with InMemory database + Repositories.
-
-🔹 Technologies:
-
-ASP.NET MVC
-
-Entity Framework Core (InMemory DB)
-
-C#
-
-jQuery
-
-Bootstrap 5 (for styling)
+- ASP.NET MVC  
+- Entity Framework Core (InMemory)  
+- C#  
+- Bootstrap 5  
+- jQuery  
 
 📂 Project Structure
 
 /Controllers
-
-AuthorController.cs
-
-BookController.cs
-
-BookLibraryController.cs
-
-BorrowingController.cs
+├── AuthorController.cs
+├── BookController.cs
+├── BookLibraryController.cs
+├── BorrowingController.cs
 
 /Services
-
-Interfaces/
-
-Implementations/
+├── Interfaces/
+└── Implementations/
 
 /Repositories
-
-Interfaces/
-
-Implementations/
+├── Interfaces/
+└── Implementations/
 
 /Models
-
-Entities/
-
-DTOs/
+├── Entities/
+└── DTOs/
 
 /Views
-
-Author/
-
-Book/
-
-BookLibrary/
-
-Borrowing/
-
+├── Author/
+├── Book/
+├── BookLibrary/
+└── Borrowing/
 🧑‍💻 Author
 
 Ahmed Roshdy.NET Developer
