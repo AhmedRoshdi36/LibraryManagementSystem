@@ -96,7 +96,7 @@ public class AuthorController : Controller
         catch (Exception ex)
         {
             // Handle exceptions (e.g., author not found)
-            return NotFound();
+            return NotFound(ex);
         }
 
         return RedirectToAction(nameof(Index));

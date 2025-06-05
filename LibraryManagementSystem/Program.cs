@@ -32,7 +32,7 @@ namespace LibraryManagementSystem
             using (var scope = app.Services.CreateScope())
             {
                 var db = scope.ServiceProvider.GetRequiredService<LibraryManagementSystem.DAL.LibraryDbContext>();
-                db.Database.EnsureCreated(); // ✅ ensures in-memory db is created and seeded
+                db.Database.EnsureCreated(); 
             }
 
             // Configure the HTTP request pipeline.

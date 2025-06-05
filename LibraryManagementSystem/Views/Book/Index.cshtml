@@ -1,6 +1,58 @@
 ﻿@model List<LibraryManagementSystem.BLL.DTos.BookDto>
 
 @{
+    ViewData["Title"] = "Books";
+}
+
+<div class="container mt-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="text-primary">@ViewData["Title"]</h2>
+        <a asp-action="Create" class="btn btn-success shadow">+ Add New Book</a>
+    </div>
+
+    <table class="table table-hover table-bordered shadow-sm">
+        <thead class="table-dark">
+            <tr>
+                <th>Title</th>
+                <th>Genre</th>
+                <th>Description</th>
+                <th>Author</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var book in Model)
+            {
+                <tr>
+                    <td>@book.BookTitle</td>
+                    <td>@book.Genre</td>
+                    <td style="max-width: 300px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="@book.Description">
+                        @(string.IsNullOrEmpty(book.Description) ? "—" : book.Description)
+                    </td>
+                    <td>@book.AuthorName</td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@book.Id"
+                           class="btn btn-sm btn-warning me-2">
+                            <i class="bi bi-pencil-square"></i> Edit
+                        </a>
+                        <form asp-action="Delete" method="post" class="d-inline">
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" name="id" value="@book.Id" />
+                            <button type="submit" class="btn btn-sm btn-danger">
+                                <i class="bi bi-trash"></i> Delete
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+
+@* @model List<LibraryManagementSystem.BLL.DTos.BookDto>
+
+@{
     ViewData["Title"] = "Books List";
 }
 
@@ -42,4 +94,4 @@
             </tr>
         }
     </tbody>
-</table>
+</table> *@

@@ -83,9 +83,17 @@ namespace LibraryManagementSystem.BLL.Services
             await _repository.DeleteAsync(id);
         }
 
-        public Task AddAsync(BookDto dto)
+        public async Task AddAsync(BookDto dto)
         {
-            throw new NotImplementedException();
+            var book = new Book
+            {
+                Title = dto.BookTitle,
+                Genre = dto.Genre,
+                Description = dto.Description,
+                AuthorId = dto.AuthorId
+            };
+
+            await _repository.AddAsync(book);
         }
     }
 }

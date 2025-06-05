@@ -1,6 +1,8 @@
 ﻿using LibraryManagementSystem.BLL.DTos;
 using LibraryManagementSystem.BLL.Interfaces;
+using LibraryManagementSystem.DAL.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace LibraryManagementSystem.Controllers
 {
@@ -26,23 +28,25 @@ namespace LibraryManagementSystem.Controllers
         // GET: Book/Create
         public async Task<IActionResult> Create()
         {
-            ViewBag.Authors = await _authorService.GetAllAsync();
+            var authors = await _authorService.GetAllAsync();
+            ViewBag.Authors = new SelectList(authors, "Id", "FullName");
             return View();
         }
 
-        // POST: Book/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(BookDto dto)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                await _bookService.AddAsync(dto);
-                return RedirectToAction(nameof(Index));
+                var authors = await _authorService.GetAllAsync();
+                ViewBag.Authors = new SelectList(authors, "Id", "FullName", dto.AuthorId);
+                return View(dto);
+
             }
-            ViewBag.Authors = await _authorService.GetAllAsync();
-            return View(dto);
-        }
+            await _bookService.AddAsync(dto);
+            return RedirectToAction(nameof(Index));
+        }   
 
         // GET: Book/Edit/5
         public async Task<IActionResult> Edit(int id)

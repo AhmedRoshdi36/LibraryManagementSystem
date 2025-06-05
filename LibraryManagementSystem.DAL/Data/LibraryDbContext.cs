@@ -13,7 +13,7 @@ public class LibraryDbContext : Microsoft.EntityFrameworkCore.DbContext
     
     public DbSet<Author> Authors { get; set; }
     public DbSet<Book> Books { get; set; }
-    public DbSet<BookTransaction> BookTransactions { get; set; }
+    public DbSet<BorrowingTransaction> BorrowingTransactions { get; set; }
 
   
          protected override void OnModelCreating(ModelBuilder modelBuilder)
