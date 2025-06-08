@@ -63,7 +63,6 @@ A simple yet functional **Library Management System** built using **ASP.NET MVC*
 
 ├─ 📄 BookController.cs
 
-├─ 📄 BookLibraryController.cs
 
 └─ 📄 BorrowingController.cs
 
@@ -92,6 +91,14 @@ A simple yet functional **Library Management System** built using **ASP.NET MVC*
 └─ 📁 DTOs
 
 
+📁 Validators
+
+  ├─ 📁 AuthorValidator 
+
+
+  └─ 📁 BookValidator 
+
+
 📁 Views
 
 ├─ 📁 Author
@@ -105,6 +112,5 @@ A simple yet functional **Library Management System** built using **ASP.NET MVC*
 
 
 🧑‍💻 Author
-
 
 Ahmed Roshdy.NET Developer
