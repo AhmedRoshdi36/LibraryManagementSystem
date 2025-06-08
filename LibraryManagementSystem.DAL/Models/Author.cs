@@ -12,7 +12,6 @@ namespace LibraryManagementSystem.DAL.Models
     {
         public int Id { get; set; }
         [Required(ErrorMessage = "Name Is Required")]
-        //[FullNameValidation]
         public string FullName { get; set; } = string.Empty;
         [Required]
         [EmailAddress(ErrorMessage = "Invalid Email Format")]

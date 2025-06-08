@@ -3,66 +3,104 @@ using LibraryManagementSystem.BLL.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LibraryManagementSystem.Controllers;
+using Microsoft.AspNetCore.Mvc;
 
-public class BorrowingController : Controller
+public class BorrowingTransactionController : Controller
 {
-    private readonly IBorrowingService _borrowingService;
+
+    private readonly  IBorrowingTransactionService _transactionService;
     private readonly IBookService _bookService;
 
-    public BorrowingController(IBorrowingService borrowingService, IBookService bookService)
+    public BorrowingTransactionController(IBorrowingTransactionService transactionService, IBookService bookService)
     {
-        _borrowingService = borrowingService;
+        _transactionService = transactionService;
         _bookService = bookService;
     }
-
-    public async Task<IActionResult> Library()
+    public async Task<IActionResult> Index(
+    string? status, DateTime? borrowDate, DateTime? returnDate, string? sortBy, int pageNumber = 1)
     {
-        var books = await _bookService.GetAllAsync();
-        return View(books); // Use BookLibraryDto list
+        int pageSize = 5;
+        var (transactions, totalCount) = await _transactionService.GetPagedAsync(
+            pageNumber, pageSize, status, borrowDate, returnDate, sortBy);
+
+        ViewBag.TotalCount = totalCount;
+        ViewBag.PageNumber = pageNumber;
+        ViewBag.PageSize   = pageSize;
+        ViewBag.SortBy     = sortBy; 
+
+        return View(transactions);
     }
 
+  
     [HttpGet]
     public async Task<IActionResult> Borrow(int bookId)
     {
-        var isAvailable = await _borrowingService.IsBookAvailableAsync(bookId);
-        if (!isAvailable) return RedirectToAction("Library");
+        var book = await _bookService.GetByIdAsync(bookId);
+        if (book == null)
+            return NotFound();
 
-        var dto = new BorrowingTransactionDto
+        var latestTransaction = await _transactionService.GetTransactionByBookIdAsync(bookId);
+        if (latestTransaction != null && latestTransaction.Status == "Borrowed")
         {
-            BookId = bookId,
-            BorrowedDate = DateTime.Now
+            TempData["Error"] = "This book is already borrowed.";
+            return RedirectToAction(nameof(Index));
+        }
+
+        var dto = new BorrowBookDto
+        {
+            BookId = book.Id,
+            BookTitle = book.BookTitle,
+            BorrowedDate = DateTime.Today
         };
+
         return View(dto);
     }
 
-    [HttpPost]
-    public async Task<IActionResult> Borrow(BorrowingTransactionDto dto)
+    [HttpPost, ActionName("Borrow")]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> BorrowConfirmed(int bookId)
     {
-        if (!ModelState.IsValid)
-            return View(dto);
-
-        var result = await _borrowingService.BorrowBookAsync(dto.BookId, dto.BorrowedDate);
-        if (!result)
+        try
         {
-            ModelState.AddModelError("", "Book is already borrowed.");
+            await _transactionService.BorrowAsync(bookId);
+            TempData["Success"] = "Book borrowed successfully.";
+            return RedirectToAction(nameof(Index));
+        }
+        catch (InvalidOperationException ex)
+        {
+            ModelState.AddModelError(string.Empty, ex.Message);
+
+            var book = await _bookService.GetByIdAsync(bookId);
+            if (book == null)
+                return NotFound();
+
+            var dto = new BorrowBookDto
+            {
+                BookId = book.Id,
+                BookTitle = book.BookTitle,
+                BorrowedDate = DateTime.Today
+            };
+
             return View(dto);
         }
-
-        return RedirectToAction("Library");
     }
 
     [HttpPost]
+    [ValidateAntiForgeryToken]
     public async Task<IActionResult> Return(int transactionId)
     {
-        await _borrowingService.ReturnBookAsync(transactionId);
-        return RedirectToAction("Library");
+        try
+        {
+            await _transactionService.ReturnAsync(transactionId);
+            TempData["Success"] = "Book returned successfully.";
+            return RedirectToAction(nameof(Index));
+        }
+        catch (InvalidOperationException ex)
+        {
+            TempData["Error"] = ex.Message;
+            return RedirectToAction(nameof(Index));
+        }
     }
 
-    [HttpGet]
-    public async Task<IActionResult> Filter(string? status, DateTime? borrowDate, DateTime? returnDate)
-    {
-        var filtered = await _borrowingService.FilterTransactionsAsync(status, borrowDate, returnDate);
-        return View("LibraryFiltered", filtered); // Optional: separate view
-    }
+ 
 }
-

@@ -1,16 +1,13 @@
 ﻿using LibraryManagementSystem.BLL.DTos;
 using LibraryManagementSystem.BLL.Interfaces;
-using LibraryManagementSystem.DAL;
-using LibraryManagementSystem.DAL.Interfaces;
-using LibraryManagementSystem.DAL.Models;
+
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+
 
 namespace LibraryManagementSystem.Controllers;
 
 public class AuthorController : Controller
 {
-    //private readonly LibraryDbContext libraryDb;
     private readonly IAuthorService _authorService;
 
     public AuthorController(IAuthorService authorService)
@@ -24,13 +21,7 @@ public class AuthorController : Controller
         return View(authors);
     }
 
-    //public async Task<IActionResult> Details(int id)
-    //{
-    //    //var author = await _authorService.GetAuthorByIdAsync(id);
-    //    //if (author == null) return NotFound();
-    //    return View(author);
-    //}
-
+   
     public IActionResult Create()
     {
         return View();
@@ -58,7 +49,6 @@ public class AuthorController : Controller
     }
 
 
-    // POST: Handle delete
     [HttpPost, ActionName("Delete")]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> DeleteConfirmed(int id)
@@ -68,7 +58,6 @@ public class AuthorController : Controller
     }
 
 
-    // GET: Author/Edit/5
     public async Task<IActionResult> Edit(int id)
     {
         var author = await _authorService.GetByIdAsync(id);
@@ -78,7 +67,6 @@ public class AuthorController : Controller
         return View(author);
     }
 
-    // POST: Author/Edit/5
     [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Edit(int id, AuthorDto dto)
@@ -95,7 +83,6 @@ public class AuthorController : Controller
         }
         catch (Exception ex)
         {
-            // Handle exceptions (e.g., author not found)
             return NotFound(ex);
         }
 

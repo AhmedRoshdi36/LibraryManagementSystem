@@ -17,7 +17,7 @@ public class LibraryDbContext : Microsoft.EntityFrameworkCore.DbContext
 
   
          protected override void OnModelCreating(ModelBuilder modelBuilder)
-    {
+         {
         base.OnModelCreating(modelBuilder);
 
         modelBuilder.Entity<Author>()
@@ -78,33 +78,109 @@ public class LibraryDbContext : Microsoft.EntityFrameworkCore.DbContext
     }
    
 );
-
         modelBuilder.Entity<Book>().HasData(
-             new Book
-             {
-                 Id = 1,
-                 Title = "Mystery Book",
-                 Genre = Genre.Mystery,
-                 AuthorId = 1,
-                 Description = "A detective unravels a complex web of secrets in a quiet town."
-             },
     new Book
     {
-        Id = 2,
-        Title = "Sci-Fi Journey",
-        Genre = Genre.SciFi,
-        AuthorId = 2,
-        Description = "A thrilling voyage through distant galaxies and futuristic technology."
+        Id = 4,
+        Title = "Shadows of the Mind",
+        Genre = Genre.Drama,
+        AuthorId = 4,
+        Description = "A deep dive into the mental struggles of a young artist."
     },
     new Book
     {
-        Id = 3,
-        Title = "The Desert Rose",
-        Genre = Genre.Romance,
-        AuthorId = 3,
-        Description = "A heartfelt love story blossoming amidst the harsh desert landscape."
+        Id = 5,
+        Title = "Cairo Secrets",
+        Genre = Genre.Thriller,
+        AuthorId = 5,
+        Description = "Hidden conspiracies unravel in the heart of Cairo’s tech scene."
+    },
+    new Book
+    {
+        Id = 6,
+        Title = "The Nile’s Whisper",
+        Genre = Genre.Children,
+        AuthorId = 6,
+        Description = "An enchanting tale about a child's magical journey along the Nile."
     }
-        );
+);
+        modelBuilder.Entity<BorrowingTransaction>().HasData(
+    new BorrowingTransaction
+    {
+        Id = 11,
+        BookId = 4,
+        BorrowedDate = new DateTime(2025, 5, 2),
+        ReturnedDate = new DateTime(2025, 5, 11)
+    },
+    new BorrowingTransaction
+    {
+        Id = 12,
+        BookId = 5,
+        BorrowedDate = new DateTime(2025, 5, 4),
+        ReturnedDate = null
+    },
+    new BorrowingTransaction
+    {
+        Id = 13,
+        BookId = 6,
+        BorrowedDate = new DateTime(2025, 5, 6),
+        ReturnedDate = new DateTime(2025, 5, 15)
+    },
+    new BorrowingTransaction
+    {
+        Id = 14,
+        BookId = 4,
+        BorrowedDate = new DateTime(2025, 5, 16),
+        ReturnedDate = null
+    },
+    new BorrowingTransaction
+    {
+        Id = 15,
+        BookId = 5,
+        BorrowedDate = new DateTime(2025, 5, 18),
+        ReturnedDate = new DateTime(2025, 5, 26)
+    },
+    new BorrowingTransaction
+    {
+        Id = 16,
+        BookId = 6,
+        BorrowedDate = new DateTime(2025, 5, 20),
+        ReturnedDate = null
+    },
+    new BorrowingTransaction
+    {
+        Id = 17,
+        BookId = 4,
+        BorrowedDate = new DateTime(2025, 5, 22),
+        ReturnedDate = new DateTime(2025, 5, 29)
+    },
+    new BorrowingTransaction
+    {
+        Id = 18,
+        BookId = 5,
+        BorrowedDate = new DateTime(2025, 5, 25),
+        ReturnedDate = null
+    },
+    new BorrowingTransaction
+    {
+        Id = 19,
+        BookId = 6,
+        BorrowedDate = new DateTime(2025, 5, 27),
+        ReturnedDate = null
+    },
+    new BorrowingTransaction
+    {
+        Id = 20,
+        BookId = 4,
+        BorrowedDate = new DateTime(2025, 5, 30),
+        ReturnedDate = null
+    }
+);
+
+
+
+
+
     }
 }
 

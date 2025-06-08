@@ -6,12 +6,13 @@ using System.Threading.Tasks;
 
 namespace LibraryManagementSystem.BLL.DTos
 {
-    public class BorrowingTransactionDto
+    public class BorrowBookDto
     {
-        public int Id { get; set; }
+
         public int BookId { get; set; }
+        public string BookTitle { get; set; } = default!;
         public DateTime BorrowedDate { get; set; }
-        public DateTime? ReturnedDate { get; set; }
+       
     }
 
 }

@@ -17,7 +17,6 @@ namespace LibraryManagementSystem.Controllers
             _authorService = authorService;
         }
 
-        // List all books
         public async Task<IActionResult> Index()
         {
             var books = await _bookService.GetAllAsync();
@@ -25,7 +24,6 @@ namespace LibraryManagementSystem.Controllers
         }
 
 
-        // GET: Book/Create
         public async Task<IActionResult> Create()
         {
             var authors = await _authorService.GetAllAsync();
@@ -48,7 +46,6 @@ namespace LibraryManagementSystem.Controllers
             return RedirectToAction(nameof(Index));
         }   
 
-        // GET: Book/Edit/5
         public async Task<IActionResult> Edit(int id)
         {
             var bookDto = await _bookService.GetByIdAsync(id);
@@ -60,8 +57,6 @@ namespace LibraryManagementSystem.Controllers
 
             return View(bookDto);
         }
-
-        // POST: Book/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, BookDto bookDto)
@@ -89,7 +84,6 @@ namespace LibraryManagementSystem.Controllers
         }
         
 
-        // POST: Book/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete(int id)
