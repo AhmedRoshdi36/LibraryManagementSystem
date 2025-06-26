@@ -8,7 +8,7 @@ A simple yet functional **Library Management System** built using **ASP.NET MVC*
 ## ✅ Features
 
 ### 📖 Author Management
-- Add, edit, delete, and list authors .
+- Add, edit, delete, and list authors.
 - Full name must contain **4 words**, each with **at least 2 characters**.
 - Email must be **unique** and follow a **valid format**.
 
